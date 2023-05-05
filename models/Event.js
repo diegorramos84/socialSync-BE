@@ -1,15 +1,12 @@
 const db = require('../database/connect');
 
 class Event {
-    constructor({ post_id, title, content, category,
-        post_time, post_date, mood, user_id }) {
-        this.id = post_id
-        this.title = title
-        this.content = content
-        this.category = category
-        this.post_time = post_time
-        this.post_date = post_date
-        this.mood = mood
+    constructor({ event_name, about, place, event_id, user_id, category_id}) {
+        this.id = event_id
+        this.event_name = event_name
+        this.about = about
+        this.place = place
+        this.category_id = category_id
         this.userId = user_id
     }
 
@@ -35,6 +32,21 @@ class Event {
         return newPost;
     }
 
+    static async find(data) {
+      console.log(data, "model l39")
+      let query = '%' + data.query + '%'
+      let response = await db.query("SELECT * FROM events WHERE about ILIKE $1 OR event_name ILIKE $1 OR place ILIKE $1", [query])
+      if (response.rows.length === 0) {
+        throw new Error("Unable to locate entry.")
+      }
+      if (response.rows.length === 1) {
+        return new Event(response.rows[0])
+      }
+      if (response.rows.length > 1) {
+        return (response.rows.map(e => new Event(e)))
+      }
+    }
+
     async destroy() {
         // console.log(data);
         let response = await db.query("DELETE FROM events WHERE post_id = $1 RETURNING *;", [this.id]);
@@ -43,7 +55,7 @@ class Event {
         }
         return new Event(response.rows[0]);
     }
+
 }
 
 module.exports = Event
-
