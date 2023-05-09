@@ -16,7 +16,7 @@ class Event {
     }
 
     static async getOneById(id) {
-        const response = await db.query("SELECT * FROM events WHERE post_id = $1", [id]);
+        const response = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate entry.")
         }
@@ -24,38 +24,33 @@ class Event {
     }
 
     static async create(data) {
-        const { title, content, category, mood } = data;
-        let response = await db.query("INSERT INTO events (location) VALUES ($1, $2, $3, $4) RETURNING *;",
-            [location]);
-        const newId = response.rows[0].postId;
+        const { event_name, about, place, category_id, user_id } = data;
+        let response = await db.query("INSERT INTO events (event_name, about, place, category_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;", [event_name, about, place, category_id, user_id]);
+        const newId = response.rows[0].event_id;
         const newPost = await Event.getOneById(newId);
         return newPost;
     }
 
+    async update(data) {
+      const response = await db.query("UPDATE events SET event_name = $1, about = $2, place = $3 WHERE event_id = $4 RETURNING event_id", [data.event_name, data.about, data.place, this.id])
+
+      if (response.rows.length != 1) {
+        throw new Error('Unable to update event content')
+      }
+
+      return new Event(response.rows[0])
+    }
+
     static async find(data) {
-      console.log(data, "model l39")
       let query = '%' + data.query + '%'
       let response = await db.query("SELECT * FROM events WHERE about ILIKE $1 OR event_name ILIKE $1 OR place ILIKE $1", [query])
       if (response.rows.length === 0) {
         throw new Error("Unable to locate entry.")
       }
-      if (response.rows.length === 1) {
-        return new Event(response.rows[0])
-      }
-      if (response.rows.length > 1) {
+      if (response.rows.length != 0) {
         return (response.rows.map(e => new Event(e)))
       }
     }
-
-    async destroy() {
-        // console.log(data);
-        let response = await db.query("DELETE FROM events WHERE post_id = $1 RETURNING *;", [this.id]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to delete entry.")
-        }
-        return new Event(response.rows[0]);
-    }
-
 }
 
 module.exports = Event
