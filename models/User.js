@@ -6,7 +6,11 @@ class User {
         this.id = user_id;
         this.username = username;
         this.password = password;
-        this.isAdmin = is_admin;
+    }
+
+    static async getAll() {
+      const response = await db.query("SELECT * from users")
+      return response.rows.map(d => new User(d));
     }
 
     static async getOneById(id) {
@@ -26,7 +30,7 @@ class User {
     }
 
     static async create(data) {
-        const { username, password, isAdmin } = data;
+        const { username, password } = data;
         let response = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;",
             [username, password]);
         const newId = response.rows[0].user_id;
