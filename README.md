@@ -35,7 +35,7 @@ PORT: 3000
 BCRYPT_SALT_ROUNDS=10
 ```
 
-## Usage
+<!-- ## Usage
 
 Provide instructions and examples for use. Include screenshots as needed.
 
@@ -78,3 +78,4 @@ If you created an application or package and would like other developers to cont
 ## Tests
 
 Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+ -->
