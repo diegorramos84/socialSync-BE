@@ -24,9 +24,9 @@ class Event {
     }
 
     static async create(data) {
-        const { title, content, category, mood } = data;
-        let response = await db.query("INSERT INTO events (location) VALUES ($1, $2, $3, $4) RETURNING *;", [location]);
-        const newId = response.rows[0].postId;
+        const { event_name, about, place, category_id, user_id } = data;
+        let response = await db.query("INSERT INTO events (event_name, about, place, category_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;", [event_name, about, place, category_id, user_id]);
+        const newId = response.rows[0].event_id;
         const newPost = await Event.getOneById(newId);
         return newPost;
     }

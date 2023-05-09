@@ -20,7 +20,18 @@ async function show(req, res) {
   }
 }
 
-// find
+async function create(req, res) {
+  try {
+    const data = req.body
+    const newEvent = await Event.create(data)
+    res.status(201).json(newEvent)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+
+// find/search
 async function find(req, res) {
   try {
     const query = req.params
@@ -35,5 +46,5 @@ async function find(req, res) {
 
 
 module.exports = {
-  index, show, find
+  index, show, create, find
 }
