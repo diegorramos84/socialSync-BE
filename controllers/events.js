@@ -30,12 +30,23 @@ async function create(req, res) {
   }
 }
 
+async function update(req, res) {
+  try {
+    const data = req.body
+    const id = parseInt(req.params.id)
+    const event = await Event.getOneById(id)
+    const result = await event.update(data)
+    res.status(200).json(result)
+  } catch (error) {
+    res.status(404).json({ error: error.message})
+  }
+}
+
 
 // find/search
 async function find(req, res) {
   try {
     const query = req.params
-    console.log(query, "controlelr query")
     const events = await Event.find(query)
     res.status(200).json(events)
   } catch (error) {
@@ -46,5 +57,5 @@ async function find(req, res) {
 
 
 module.exports = {
-  index, show, create, find
+  index, show, create, update, find
 }

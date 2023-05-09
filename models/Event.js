@@ -31,6 +31,16 @@ class Event {
         return newPost;
     }
 
+    async update(data) {
+      const response = await db.query("UPDATE events SET event_name = $1, about = $2, place = $3 WHERE event_id = $4 RETURNING event_id", [data.event_name, data.about, data.place, this.id])
+
+      if (response.rows.length != 1) {
+        throw new Error('Unable to update event content')
+      }
+
+      return new Event(response.rows[0])
+    }
+
     static async find(data) {
       let query = '%' + data.query + '%'
       let response = await db.query("SELECT * FROM events WHERE about ILIKE $1 OR event_name ILIKE $1 OR place ILIKE $1", [query])
