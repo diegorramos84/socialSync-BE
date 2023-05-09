@@ -1,4 +1,5 @@
 const Event = require('../models/Event');
+const Token = require('../models/Token')
 
 
 async function index(req, res) {
@@ -23,7 +24,8 @@ async function show(req, res) {
 async function create(req, res) {
   try {
     const data = req.body
-    const newEvent = await Event.create(data)
+    const user = await Token.getOneByToken(data.token)
+    const newEvent = await Event.create(data, user.user_id)
     res.status(201).json(newEvent)
   } catch (error) {
     res.status(400).json({ error: error.message })
