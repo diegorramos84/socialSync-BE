@@ -25,15 +25,13 @@ class Event {
 
     static async create(data) {
         const { title, content, category, mood } = data;
-        let response = await db.query("INSERT INTO events (location) VALUES ($1, $2, $3, $4) RETURNING *;",
-            [location]);
+        let response = await db.query("INSERT INTO events (location) VALUES ($1, $2, $3, $4) RETURNING *;", [location]);
         const newId = response.rows[0].postId;
         const newPost = await Event.getOneById(newId);
         return newPost;
     }
 
     static async find(data) {
-      console.log(data, "model l39")
       let query = '%' + data.query + '%'
       let response = await db.query("SELECT * FROM events WHERE about ILIKE $1 OR event_name ILIKE $1 OR place ILIKE $1", [query])
       if (response.rows.length === 0) {
@@ -46,16 +44,6 @@ class Event {
         return (response.rows.map(e => new Event(e)))
       }
     }
-
-    async destroy() {
-        // console.log(data);
-        let response = await db.query("DELETE FROM events WHERE post_id = $1 RETURNING *;", [this.id]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to delete entry.")
-        }
-        return new Event(response.rows[0]);
-    }
-
 }
 
 module.exports = Event

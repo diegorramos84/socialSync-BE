@@ -1,7 +1,14 @@
 const Event = require('../models/Event');
 
 
-
+async function index(req, res) {
+  try {
+    const events = await Event.getAll()
+    res.status(200).json(events)
+  } catch (error) {
+    res.status(404).json({ error: error.message })
+  }
+}
 
 // find
 async function find(req, res) {
@@ -18,5 +25,5 @@ async function find(req, res) {
 
 
 module.exports = {
-  find
+  index, find
 }
