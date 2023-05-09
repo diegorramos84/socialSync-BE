@@ -37,10 +37,7 @@ class Event {
       if (response.rows.length === 0) {
         throw new Error("Unable to locate entry.")
       }
-      if (response.rows.length === 1) {
-        return new Event(response.rows[0])
-      }
-      if (response.rows.length > 1) {
+      if (response.rows.length != 0) {
         return (response.rows.map(e => new Event(e)))
       }
     }
