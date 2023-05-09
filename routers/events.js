@@ -5,9 +5,9 @@ const authenticator = require("../middleware/authenticator")
 const eventsRouter = Router()
 
 eventsRouter.get('/', eventController.index)
-eventsRouter.post('/', authenticator, eventController.create)
+eventsRouter.post('/', eventController.create)
 eventsRouter.get('/:id', eventController.show)
-eventsRouter.patch('/:id', authenticator, eventController.update)
+eventsRouter.patch('/:id', eventController.update)
 eventsRouter.get('/search/:query', eventController.find)
 
 module.exports = eventsRouter
