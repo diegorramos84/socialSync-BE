@@ -54,8 +54,6 @@ async function find(req, res) {
   }
 }
 
-
-
 module.exports = {
   index, show, create, update, find
 }
