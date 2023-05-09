@@ -6,6 +6,16 @@ async function index(req, res) {
     const events = await Event.getAll()
     res.status(200).json(events)
   } catch (error) {
+      res.status(404).json({ error: error.message })
+  }
+}
+
+async function show(req, res) {
+  try {
+    const id = req.params.id
+    const event = await Event.getOneById(id)
+    res.status(200).json(event)
+  } catch (error) {
     res.status(404).json({ error: error.message })
   }
 }
@@ -25,5 +35,5 @@ async function find(req, res) {
 
 
 module.exports = {
-  index, find
+  index, show, find
 }

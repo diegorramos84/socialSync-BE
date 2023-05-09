@@ -16,7 +16,7 @@ class Event {
     }
 
     static async getOneById(id) {
-        const response = await db.query("SELECT * FROM events WHERE post_id = $1", [id]);
+        const response = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate entry.")
         }
