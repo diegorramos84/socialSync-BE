@@ -1,12 +1,13 @@
 const db = require('../database/connect');
 
 class Event {
-    constructor({ category_name, event_name, about, place, event_id, user_id, username}) {
+    constructor({ category_name, event_name, about, place, event_date, event_id, user_id, username}) {
         this.id = event_id
         this.category_name = category_name
         this.event_name = event_name
         this.about = about
         this.place = place
+        this.even_date = event_date
         this.userId = user_id
         this.creator = username
     }
@@ -25,9 +26,10 @@ class Event {
     }
 
     static async create(data, id) {
-        const { event_name, about, place, category_name } = data;
+        const { event_name, about, place, category_name, event_date } = data;
+        console.log(data)
         const user_id = id
-        let response = await db.query("INSERT INTO events (category_name, event_name, about, place, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;", [category_name, event_name, about, place, user_id]);
+        let response = await db.query("INSERT INTO events (category_name, event_name, about, place, event_date, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [category_name, event_name, about, place, event_date, user_id]);
         const newId = response.rows[0].event_id;
         const newPost = await Event.getOneById(newId);
         return newPost;

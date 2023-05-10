@@ -26,8 +26,7 @@ CREATE TABLE events (
     event_name VARCHAR (100) NOT NULL,
     about VARCHAR (500) NOT NULL,
     place VARCHAR (100) NOT NULL,
-    event_time TIME DEFAULT CURRENT_TIME,
-    event_date DATE DEFAULT CURRENT_DATE,
+    event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INT,
     PRIMARY KEY (event_id),
     FOREIGN KEY (user_id) REFERENCES users("user_id")
