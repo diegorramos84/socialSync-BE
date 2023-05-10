@@ -40,7 +40,7 @@ async function update(req, res) {
     const result = await event.update(data)
     res.status(200).json(result)
   } catch (error) {
-    res.status(404).json({ error: error.message})
+    res.status(404).json({ error: error.message })
   }
 }
 
@@ -52,7 +52,7 @@ async function find(req, res) {
     const events = await Event.find(query)
     res.status(200).json(events)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(404).json({ error: error.message })
   }
 }
 
