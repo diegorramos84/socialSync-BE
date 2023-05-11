@@ -11,7 +11,7 @@ describe('api server', () => {
 
   beforeAll(async () => {
     api = app.listen(3000, () => {
-      console.log('Test server running on port 5000')
+      console.log('Test server running on port 3000')
     })
 
   //   const passwordHash = await bcrypt.hash('sekret', 10)
