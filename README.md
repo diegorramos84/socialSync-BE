@@ -37,24 +37,85 @@ PORT: 3000
 # add BCRYPT_SALT_ROUNDS
 BCRYPT_SALT_ROUNDS=10
 ```
+5. run the setup-db script to get your database ready
+```js
+npm run setup-db
+```
+6. start the server
+```js
+npm run start
 
-<!-- ## Usage
+# or for development (auto server refreshes)
 
-Provide instructions and examples for use. Include screenshots as needed.
+npm run dev
+```
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+## Usage
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+With the server running, you can know interact with the API using a platform like Postman
+    
+1. Users Endpoint
+```js
+# create user
+POST http://localhost:3000/users/register
+{
+ "username":  "username",
+ "password": "password"
+}
 
+# login
+POST http://localhost:3000/users/login
+ {
+  "username":  "username",
+  "password": "password"
+ }
+```
+2. Events Endpoint
+```js
+# Get all events
+GET http://localhost:3000/events
+
+# Get one event by id
+GET http://localhost:3000/events/:id
+
+# Create new event
+POST http://localhost:3000/events
+{
+    "category_name": "Issues",
+    "event_name": "test",
+    "about": "testing this",
+    "place": "Brazil",
+    "category_name": "Other",
+    "event_date": "2023-05-04T11:36",
+    "token": "yourtoken"
+}
+
+# Search events
+GET http://localhost:3000/events/search/:query
+
+:query => word you are looking for
+
+e.g.:
+
+GET http://localhost:3000/events/search/issues
+
+[
+    {
+        "id": 2,
+        "category_name": "Issues",
+        "event_name": "Second Entry",
+        "about": "An issue found on Tuesday",
+        "place": "London",
+        "even_date": "2023-05-11T10:56:40.997Z",
+        "userId": 1,
+        "creator": "admin"
+    }
+]
+
+```
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+This project was done by myself, (Becky)[https://github.com/Beckibuzz93] and Daniel
 
 ## License
 
@@ -81,4 +142,3 @@ If you created an application or package and would like other developers to cont
 ## Tests
 
 Go the extra mile and write tests for your application. Then provide examples on how to run them here.
- -->
