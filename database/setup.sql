@@ -34,12 +34,10 @@ CREATE TABLE events (
 
 
 INSERT INTO users (username, password)
-VALUES ('admin', 'admin'),
-('user', '12345');
-
+VALUES ('admin', 'admin');
 
 INSERT INTO events (category_name, event_name, about, place, user_id)
-VALUES ('General', 'First Entry', 'An event on Monday', 'London', 2),
-('Issues','Second Entry', 'An issue found on Tuesday', 'London', 2),
-('Looking for work','Third Entry', 'Join Wednesday clean-up day', 'London', 2),
-('Library','Fourth Entry', 'Volunteer at the library', 'London', 2);
+VALUES ('General', 'First Entry', 'An event on Monday', 'London', 1),
+('Issues','Second Entry', 'An issue found on Tuesday', 'London', 1),
+('Looking for work','Third Entry', 'Join Wednesday clean-up day', 'London', 1),
+('Library','Fourth Entry', 'Volunteer at the library', 'London', 1);
