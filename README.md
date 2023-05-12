@@ -1,4 +1,4 @@
-# SocialSync
+# SocialSync - Backend
 <img src="https://github.com/diegorramos84/socialSync-BE/assets/17050237/5a2b3389-7709-4265-a642-2dc40d7bb93d">
 
 # Description
