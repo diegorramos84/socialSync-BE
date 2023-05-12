@@ -13,7 +13,7 @@ class Event {
     }
 
     static async getAll() {
-        const response = await db.query("SELECT * FROM events JOIN users ON events.user_id=users.user_id");
+        const response = await db.query("SELECT * FROM events JOIN users ON events.user_id=users.user_id ORDER by event_id DESC");
         return response.rows.map(d => new Event(d));
     }
 
