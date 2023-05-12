@@ -1,15 +1,13 @@
-# socialSync API
-<p align="center">
-    <img src="https://github.com/diegorramos84/socialSync-BE/assets/17050237/5a2b3389-7709-4265-a642-2dc40d7bb93d">
-</p
+# SocialSync - Client
+<img src="https://github.com/diegorramos84/socialSync-BE/assets/17050237/5a2b3389-7709-4265-a642-2dc40d7bb93d">
 
-## Description
+# Description
 
 This is the backend of the socialSync project developed during the Lap 2 of the LFA training - Avgerou Virtual cohort
 
 The objective of this project is to build a platform for people living in the same area where they can share local events, look for help or discuss local issues
 
-## Installation
+# Installation 
 
 1. clone this repo
 ```bash
@@ -50,7 +48,7 @@ npm run start
 npm run dev
 ```
 
-## Usage
+# Usage
 
 With the server running, you can know interact with the API using a platform like Postman
     
@@ -113,6 +111,11 @@ GET http://localhost:3000/events/search/issues
 ]
 
 ```
-## Credits
+# Credits
+## This project was created by: 
 
-This project was done by myself, [Becky](https://github.com/Beckibuzz93) and [Daniel](https://github.com/danteoguns11)
+[Diego: diegorramos84](https://github.com/diegorramos84)
+
+[Daniel: danteoguns11](https://github.com/danteoguns11)
+
+[Becki: Beckibuzz93](https://github.com/Beckibuzz93)
